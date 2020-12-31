@@ -9,10 +9,10 @@ export const readGuilds = async (
 
   for (const guild of guilds) {
     // Check that the db has the selected guild
-    await Server.select("id").find(guild.id);
-
+    const server: Server = await Server.find(guild.id);
+    
     // if the guild does not exist in the db, add it
-    if (await Server.count() !== 1) {
+    if (!server) {
       await Server.create({ id: guild.id });
     }
   }
