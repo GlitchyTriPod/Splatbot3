@@ -32,4 +32,7 @@ export const events = (client: CommandClient): void => {
       }
     }
   });
+
+  // Hopefully catches that stupid ErrorEvent error thing
+  client.on("error", console.error);
 };
