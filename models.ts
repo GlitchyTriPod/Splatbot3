@@ -9,7 +9,7 @@ export class Server extends Model {
   static table: string = "servers";
 
   static fields = {
-    id: {
+    _id: {
       type: DataTypes.TEXT,
       primaryKey: true,
       unique: true,
@@ -35,14 +35,13 @@ export class Quote extends Model {
   static table: string = "quotes";
 
   static fields = {
-    id: {
+    _id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
     content: {
       type: DataTypes.TEXT,
-      unique: true,
       allowNull: false,
     },
     // records the last date the quote was posted
