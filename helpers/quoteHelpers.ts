@@ -43,15 +43,30 @@ export const getQuote = async (
 
   // if there was not a null date quote, use weighting
   if (!selectedQuote) {
-    // get the lowest weight quote
-    selectedQuote = quotes.reduce(
-      (a: Quote, b: Quote): Quote => {
-        return Date.parse(<string> a.lastPostDate) <
-            Date.parse(<string> b.lastPostDate)
-          ? a
-          : b;
-      },
-    );
+    
+    // sort the quotes by post date
+    const sortedQuotes: Quote[] = quotes.sort((a: Quote, b: Quote): number => {
+      return Date.parse(<string> a.lastPostDate) -
+        Date.parse(<string> b.lastPostDate);
+    });
+
+    // prefers the earliest post date but has a chance to post something posted later
+    for (let i: number = 0; i < sortedQuotes.length; i++) {
+
+      // if at end of array, assign latest to quote
+      if (i === sortedQuotes.length - 1) selectedQuote = sortedQuotes[i];
+      else {
+
+        // generate random number between 0-2
+        const r: number = Math.floor(Math.random() * Math.floor(3));
+
+        // if 2, select quote (1 in 3 chance)
+        if (r >= 2) selectedQuote = sortedQuotes[i];
+      }
+
+      // if a quote was decided upon, end loop
+      if (selectedQuote) break;
+    }
   }
 
   // if a quote was found, reply using it.
