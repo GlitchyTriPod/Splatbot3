@@ -9,11 +9,11 @@ export const readGuilds = async (
 
   for (const guild of guilds) {
     // Check that the db has the selected guild
-    const server: Server = await Server.find(guild.id);
+    const server: Server = await Server.where("snowflake", guild.id).first();
     
     // if the guild does not exist in the db, add it
     if (!server) {
-      await Server.create({ id: guild.id });
+      await Server.create({ snowflake: guild.id });
     }
   }
 };

@@ -1,15 +1,22 @@
-import { Message } from "https://deno.land/x/harmony/mod.ts";
-import { Quote } from "../models.ts";
+import { Message, Snowflake } from "https://deno.land/x/harmony/mod.ts";
+import { Quote, Server } from "../models.ts";
 
 // Gets quote content + updates the post date
 export const getQuote = async (
   msg: Message,
   chaos: Boolean = false,
 ): Promise<string | undefined> => {
+  // get the current server by snowflake
+  let server: Server = await Server.where("snowflake", msg.guild?.id).first();
+  if (!server) {
+    msg.reply("Error: Server ID could not be found in database");
+    return;
+  }
+
   // get all quotes related to the server
   let quotes: Quote | Quote[] = await Quote.where(
     "serverId",
-    msg.guild?.id,
+    <string> server._id,
   ).all();
 
   // if quotes is empty array, that means the server does not have any quotes
@@ -37,13 +44,12 @@ export const getQuote = async (
   // if there are any null post dates, use it
   let selectedQuote: Quote | undefined = quotes.find(
     (x: Quote): Boolean => {
-      return x.lastPostDate === null;
+      return !x.lastPostDate;
     },
   );
 
   // if there was not a null date quote, use weighting
   if (!selectedQuote) {
-    
     // sort the quotes by post date
     const sortedQuotes: Quote[] = quotes.sort((a: Quote, b: Quote): number => {
       return Date.parse(<string> a.lastPostDate) -
@@ -52,11 +58,9 @@ export const getQuote = async (
 
     // prefers the earliest post date but has a chance to post something posted later
     for (let i: number = 0; i < sortedQuotes.length; i++) {
-
       // if at end of array, assign latest to quote
       if (i === sortedQuotes.length - 1) selectedQuote = sortedQuotes[i];
       else {
-
         // generate random number between 0-2
         const r: number = Math.floor(Math.random() * Math.floor(3));
 
