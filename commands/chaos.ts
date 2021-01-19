@@ -13,7 +13,7 @@ export class ToggleChaos extends Command {
     const serverId: string | undefined = ctx.message.guild?.id;
     if (match && serverId) {
       // grab the server model from the db.
-      const server: Server = await Server.find(serverId);
+      const server: Server = await Server.where("snowflake", serverId).first();
       // toggle chaos mode for the server
       switch (match[0].slice(1).toUpperCase()) {
         case "ON":
