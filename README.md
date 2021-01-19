@@ -11,6 +11,10 @@ Splatbot can store and return Quotes on request.
         -For example: '!addquote LET ME IN!!! -t let me in'.
         -What do triggers do? Read more in the Chaos Mode section.
 
+*!quote*
+    -Replies to your message with a random quote!
+        -Quotes are recorded on a per-server basis.
+
 **Chaos Mode**
 Chaos mode allows Splatbot to automatically respond to messages based on the trigger words added to quotes.
 CHAOS MODE CAN BE VERY ANNOYING. This is intentional. Please use it with discretion.
@@ -20,4 +24,4 @@ CHAOS MODE CAN BE VERY ANNOYING. This is intentional. Please use it with discret
         -When Chaos Mode is enabled, Splatbot will read each message sent in the server and reply with a quote if the message used the correct trigger word.
     -'!chaos info' will tell you the current chaos setting for your server.
 
-And that's it for now! I am maintained by <@216358621754294283>
+And that's it for now! I am maintained by Tristan "Lloyd" Rowan
