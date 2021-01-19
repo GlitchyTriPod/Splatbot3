@@ -21,9 +21,7 @@ export const events = (client: CommandClient): void => {
     // check to make sure that the msg was not written by the client
     if (msg.author.id !== client.user?.id && msg.guild) {
       // check if server has chaos mode on
-      const server: Server = await Server.select("chaosMode").find(
-        msg.guild.id,
-      );
+      const server: Server = await Server.where("snowflake", msg.guild.id).first()
       
       // ensure that chaos mode is enabled before sending auto reply
       if (server.chaosMode) {
