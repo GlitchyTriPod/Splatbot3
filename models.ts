@@ -1,5 +1,4 @@
 import {
-  DataTypes,
   Model,
   Relationships,
 } from "https://deno.land/x/denodb/mod.ts";
@@ -9,14 +8,14 @@ export class Server extends Model {
   static table: string = "servers";
 
   static fields = {
-    id: {
-      type: DataTypes.TEXT,
+    _id: {
       primaryKey: true,
+    },
+    snowflake: {
       unique: true,
     },
     // Allows automatic quote replies if enabled
     chaosMode: {
-      type: DataTypes.INTEGER,
       allowNull: false,
     },
   };
@@ -35,26 +34,20 @@ export class Quote extends Model {
   static table: string = "quotes";
 
   static fields = {
-    id: {
-      type: DataTypes.INTEGER,
+    _id: {
       primaryKey: true,
-      autoIncrement: true,
     },
     content: {
-      type: DataTypes.TEXT,
-      unique: true,
       allowNull: false,
     },
     // records the last date the quote was posted
     // used when weighting replies
     lastPostDate: {
-      type: DataTypes.TEXT,
       allowNull: true,
     },
     // if chaos is enabled, the quote will automatically
     // be posted if the trigger is anywhere in a sent message
     trigger: {
-      type: DataTypes.TEXT,
       allowNull: true,
     },
     serverId: Relationships.belongsTo(Server),

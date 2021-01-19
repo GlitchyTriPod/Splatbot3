@@ -1,5 +1,5 @@
 import { Command, CommandContext } from "https://deno.land/x/harmony/mod.ts";
-import { Quote } from "../models.ts";
+import { Quote, Server } from "../models.ts";
 import { getQuote } from "../helpers/quoteHelpers.ts";
 
 // adds a new quote to the db
@@ -27,12 +27,17 @@ export class AddQuote extends Command {
         content = arr[0];
         trigger = arr[1]; // splitting this way should result in only 2 indeces
       }
+
+      // get the server by ID
+      const server: Server = await Server.where("snowflake", serverId).first();
+
       // create the quote
-      Quote.create({
-        content: content, // slice off the space at the end
-        serverId: serverId,
-        trigger: trigger,
-      });
+      const quote: Quote = new Quote();
+      quote.content = content;
+      quote.serverId = server._id;
+      if (trigger) quote.trigger = trigger;
+      quote.save();
+
       ctx.message.reply("Quote added!");
     } else {
       // command or server id is improperly formatted

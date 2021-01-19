@@ -1,5 +1,10 @@
-import { Database } from "https://deno.land/x/denodb/mod.ts";
+import { Database, MongoDBConnector } from "https://deno.land/x/denodb/mod.ts";
 
-export const db: Database = new Database("sqlite3", {
-  filepath: "./dbfile.sqlite",
-});
+const config: any = JSON.parse(await Deno.readTextFile("./config.json"));
+
+export const db: Database = new Database(
+  new MongoDBConnector({
+    uri: config.connectionString,
+    database: "splatbot",
+  }),
+);
