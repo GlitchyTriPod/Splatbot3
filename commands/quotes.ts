@@ -7,8 +7,11 @@ export class AddQuote extends Command {
   name = "addquote";
 
   execute = async (ctx: CommandContext): Promise<void> => {
+    // fix newline characters in quote
+    const msgContent: string = ctx.message.content.replaceAll("\n", "\\n");
     // get quote content
-    const match: RegExpMatchArray | null = ctx.message.content.match(/\ (.*)/);
+    const match: RegExpMatchArray | null = msgContent.match(/\ (.*)/);
+    console.log(match)
 
     // get the id of the server
     const serverId: string | undefined = ctx.message.guild?.id;
