@@ -58,3 +58,24 @@ export class Quote extends Model {
   }
 }
 
+// Splatfest Topic model
+export class SplatfestTopic extends Model {
+  static table: string = "splatfesttopic";
+
+  static fields = {
+    _id: {
+      primaryKey: true,
+    },
+    topic: {
+      allowNull: false,
+    },
+    lastPostDate: {
+      allowNull: true,
+    },
+    serverId: Relationships.belongsTo(Server),
+  };
+
+  static server() {
+    return this.hasOne(Server);
+  }
+}
