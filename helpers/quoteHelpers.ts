@@ -78,6 +78,6 @@ export const getQuote = async (
     // remember to update the post date for weighting
     selectedQuote.lastPostDate = (new Date()).toString();
     selectedQuote.update();
-    return <string> selectedQuote.content;
+    return (<string> selectedQuote.content).replaceAll("\\n", "\n");
   }
 };
