@@ -1,4 +1,4 @@
-import { Message, Snowflake } from "https://deno.land/x/harmony/mod.ts";
+import { Message } from "https://deno.land/x/harmony/mod.ts";
 import { Quote, Server } from "../models.ts";
 
 // Gets quote content + updates the post date
@@ -7,7 +7,7 @@ export const getQuote = async (
   chaos: Boolean = false,
 ): Promise<string | undefined> => {
   // get the current server by snowflake
-  let server: Server = await Server.where("snowflake", msg.guild?.id).first();
+  const server: Server = await Server.where("snowflake", msg.guild?.id).first();
   if (!server) {
     msg.reply("Error: Server ID could not be found in database");
     return;
