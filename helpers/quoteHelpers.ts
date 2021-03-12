@@ -4,10 +4,10 @@ import { Quote, Server } from "../models.ts";
 // Gets quote content + updates the post date
 export const getQuote = async (
   msg: Message,
-  chaos: Boolean = false,
+  chaos = false,
 ): Promise<string | undefined> => {
   // get the current server by snowflake
-  const server: Server = await Server.where("snowflake", msg.guild?.id).first();
+  const server: Server = await Server.where("snowflake", <string> msg.guild?.id).first();
   if (!server) {
     msg.reply("Error: Server ID could not be found in database");
     return;
@@ -33,7 +33,7 @@ export const getQuote = async (
   // is chaos mode enabled?
   if (chaos) {
     // filter by the ones that meet their triggers
-    quotes = quotes.filter((q: Quote): Boolean => {
+    quotes = quotes.filter((q: Quote): boolean => {
       if (!q.trigger) return false; // return false if the quote does not have a trigger
       return msg.content.toLowerCase()
         .includes((<string> q.trigger).toLowerCase());
@@ -43,7 +43,7 @@ export const getQuote = async (
 
   // if there are any null post dates, use it
   let selectedQuote: Quote | undefined = quotes.find(
-    (x: Quote): Boolean => {
+    (x: Quote): boolean => {
       return !x.lastPostDate;
     },
   );
@@ -57,7 +57,7 @@ export const getQuote = async (
     });
 
     // prefers the earliest post date but has a chance to post something posted later
-    for (let i: number = 0; i < sortedQuotes.length; i++) {
+    for (let i = 0; i < sortedQuotes.length; i++) {
       // if at end of array, assign latest to quote
       if (i === sortedQuotes.length - 1) selectedQuote = sortedQuotes[i];
       else {
