@@ -1,7 +1,7 @@
 import {
   Model,
   Relationships,
-} from "https://deno.land/x/denodb/mod.ts";
+} from "https://deno.land/x/denodb/mod";
 
 // Main Server Model
 export class Server extends Model {

@@ -24,4 +24,13 @@ CHAOS MODE CAN BE VERY ANNOYING. This is intentional. Please use it with discret
         -When Chaos Mode is enabled, Splatbot will read each message sent in the server and reply with a quote if the message used the correct trigger word.
     -'!chaos info' will tell you the current chaos setting for your server.
 
+**Splatfest Generator**
+Splatbot can come up with ideas for Splatfests based on topics added by YOU!!!
+
+*!addtopic*
+    -Adds a topic to Splatbot that can then be used as a part of the random Splatfest generator.
+
+*!splatfest*
+    -Generates a random Splatfest based on topics added through '!addtopic'.
+
 And that's it for now! I am maintained by Tristan "Lloyd" Rowan

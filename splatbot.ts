@@ -1,8 +1,8 @@
-import { CommandClient, Intents } from "https://deno.land/x/harmony/mod.ts";
-import { db } from "./db.ts";
-import { events } from "./events.ts";
-import * as models from "./models.ts";
-import * as commands from "./commands/cmdIndex.ts";
+import { CommandClient, Intents } from "https://deno.land/x/harmony/mod";
+import { db } from "./db";
+import { events } from "./events";
+import * as models from "./models";
+import * as commands from "./commands/cmdIndex";
 
 // Read config file (token)
 const config: any = JSON.parse(await Deno.readTextFile("./config.json"));

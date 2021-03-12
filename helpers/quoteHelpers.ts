@@ -1,5 +1,6 @@
 import { Message } from "https://deno.land/x/harmony/mod.ts";
 import { Quote, Server } from "../models.ts";
+import { ConnectionState } from 'c:/users/tristan/appdata/local/deno/deps/https/deno.land/e857421ae5d999f2ba0c145975d3c9e22ccdd1818c6b4cb4fac881a2857aa324';
 
 // Gets quote content + updates the post date
 export const getQuote = async (
@@ -80,4 +81,26 @@ export const getQuote = async (
     selectedQuote.update();
     return (<string> selectedQuote.content).replaceAll("\\n", "\n");
   }
+};
+
+export const deleteQuote = async (msg: Message): Promise<void> => {
+  console.log("deleting...")
+
+  // get the current server by snowflake
+  const server: Server = await Server.where("snowflake", msg.guild?.id).first();
+  if (!server) {
+    msg.reply("Error: Server ID could not be found in database");
+    return;
+  }
+  
+  // get all quotes related to the server
+  const quote: Quote | Quote[] = await Quote.where(
+    "serverId",
+    <string> server._id,
+  ).all();
+
+  const theOne = // finish this idiot
+
+  quote.delete();
+  quote.save();
 };
