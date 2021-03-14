@@ -28,6 +28,14 @@ export class AddQuote extends Command {
         const arr: string[] = content.split(" -t ");
         content = arr[0];
         trigger = arr[1]; // splitting this way should result in only 2 indeces
+        // This shouldn't need to change for multi-quotes
+      }
+
+      // check if there is an even number of quotation marks on the trigger def
+      // if there isn't, the triggers are formatted incorrectly
+      if ((trigger?.match(/"/g) || []).length % 2 !== 0) {
+        ctx.message.reply("Error: Trigger was not formatted correcltly.\nDid you forget a **\"** ?")
+        return;
       }
 
       // get the server by ID

@@ -35,8 +35,24 @@ export const getQuote = async (
     // filter by the ones that meet their triggers
     quotes = quotes.filter((q: Quote): boolean => {
       if (!q.trigger) return false; // return false if the quote does not have a trigger
+
+      const trigger = <string> q.trigger; // convenience
+
+      // check if there are multiple triggers defined
+      if (trigger.includes("\"")) { // if it has quotes, it's a multi trigger
+        // finds all of the separate triggers using regex
+        return Boolean(trigger.match(/".*?"/g)?.find((val: string) => {
+          // checks message content to see if it includes the trigger
+          return msg.content.toLowerCase()
+            .includes(val.slice(1, val.length - 1).toLowerCase()); // trim off quotation marks
+        }))
+        // ID'd match gets parsed as a boolean as a signal the filter that
+        // the match was found
+      }
+
+      // if trigger is singular, parse as normal
       return msg.content.toLowerCase()
-        .includes((<string> q.trigger).toLowerCase());
+        .includes(trigger.toLowerCase());
     });
     if (!quotes.length) return; // end if there are no triggered quotes
   }
