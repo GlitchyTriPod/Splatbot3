@@ -5,7 +5,7 @@ import {
 
 // Main Server Model
 export class Server extends Model {
-  static table: string = "servers";
+  static table = "servers";
 
   static fields = {
     _id: {

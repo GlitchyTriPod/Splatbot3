@@ -6,7 +6,7 @@ export const getTopics = async (
   msg: Message,
 ): Promise<SplatfestTopic[] | undefined> => {
   // get the current server by snowflake
-  const server: Server = await Server.where("snowflake", msg.guild?.id).first();
+  const server: Server = await Server.where("snowflake", <string> msg.guild?.id).first();
   if (!server) return;
 
   // get all topics related to the server
@@ -24,7 +24,7 @@ export const getTopics = async (
   // check if there are any topics that have not been posted yet
   const noPostDate: SplatfestTopic[] = topics.filter((
     t: SplatfestTopic,
-  ): Boolean => !t.lastPostDate);
+  ): boolean => !t.lastPostDate);
 
   // pick these first
   for (const topic of noPostDate) {
@@ -43,10 +43,10 @@ export const getTopics = async (
     if (returnTopics.length === 2) {
       if (returnTopics[0].topic === returnTopics[1].topic) returnTopics.pop();
       else return returnTopics;
-    };
+    }
 
     //prefers the earliuest post date but has a chance to post something posted later
-    for (let i: number = 0; i < topics.length; i++) {
+    for (let i = 0; i < topics.length; i++) {
       let selectedTopic: SplatfestTopic | undefined;
       
       // if at end of array, assign latest to quote
