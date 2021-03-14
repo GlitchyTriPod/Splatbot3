@@ -1,6 +1,6 @@
-import { Command, CommandContext } from "https://deno.land/x/harmony/mod";
-import { Server, SplatfestTopic } from "../models";
-import { getTopics } from "../helpers/topicHelper";
+import { Command, CommandContext } from "https://deno.land/x/harmony/mod.ts";
+import { Server, SplatfestTopic } from "../models.ts";
+import { getTopics } from "../helpers/topicHelper.ts";
 
 // adds a new splatfest topic to the db
 

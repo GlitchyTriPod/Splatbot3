@@ -49,10 +49,10 @@ export const events = (client: CommandClient): void => {
         msg.author.id === client.user?.id &&
         msgReact.emoji.name === "delet" // reaction should be using the "delet" emoji
       ) {
-        console.log("gonna delete it")
-        await deleteQuote(msg);
-        msg.delete();
-        msg.channel.send("Quote deleted!");
+        if (await deleteQuote(msg)) { // deleteQuote will return true if message is deleted properly
+          msg.delete();
+          msg.channel.send("Quote deleted!");
+        }
       }
     },
   );

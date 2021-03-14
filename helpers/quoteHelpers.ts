@@ -1,6 +1,5 @@
 import { Message } from "https://deno.land/x/harmony/mod.ts";
 import { Quote, Server } from "../models.ts";
-import { ConnectionState } from 'c:/users/tristan/appdata/local/deno/deps/https/deno.land/e857421ae5d999f2ba0c145975d3c9e22ccdd1818c6b4cb4fac881a2857aa324';
 
 // Gets quote content + updates the post date
 export const getQuote = async (
@@ -83,24 +82,35 @@ export const getQuote = async (
   }
 };
 
-export const deleteQuote = async (msg: Message): Promise<void> => {
-  console.log("deleting...")
+// deletes quote based off of the content of the passed in message
+export const deleteQuote = async (msg: Message): Promise<boolean> => {
+  // prevents edge case in identifying messages in db
+  const srcContent: string = msg.content.replace("\n", "\\n");
 
   // get the current server by snowflake
-  const server: Server = await Server.where("snowflake", msg.guild?.id).first();
+  const server: Server = await Server.where("snowflake", <string> msg.guild?.id).first();
   if (!server) {
     msg.reply("Error: Server ID could not be found in database");
-    return;
+    return false;
   }
   
   // get all quotes related to the server
-  const quote: Quote | Quote[] = await Quote.where(
+  const quote: Quote[] = await Quote.where(
     "serverId",
     <string> server._id,
   ).all();
 
-  const theOne = // finish this idiot
+  
 
-  quote.delete();
-  quote.save();
+  const msgToDel: Quote | undefined = quote.find((x: Quote): boolean => x.content === srcContent);
+
+  console.log(msgToDel)
+  if(!msgToDel) {
+    msg.reply("Error: Message not found in database.");
+    return false;
+  }
+
+  // msg was ID'd, delete message
+  await msgToDel.delete();
+  return true;
 };

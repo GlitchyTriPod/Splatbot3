@@ -1,4 +1,4 @@
-import { Database, MongoDBConnector } from "https://deno.land/x/denodb/mod";
+import { Database, MongoDBConnector } from "https://deno.land/x/denodb/mod.ts";
 
 const config = JSON.parse(await Deno.readTextFile("./config.json"));
 
