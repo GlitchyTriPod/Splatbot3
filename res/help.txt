@@ -9,7 +9,10 @@ Splatbot can store and return Quotes on request.
     -Add a quote to Splatbot using '!addquote' + the content of your quote.
         -You can optionally add a trigger to your quote by adding '-t' + your trigger at the end of the added quote.
         -For example: '!addquote LET ME IN!!! -t let me in'.
+        -You can also add multiple triggers to your quotes by separating them with quotation marks!
+        -Ex.: '!addquote Hewwo? -t "hello" "hi" "hey"'.
         -What do triggers do? Read more in the Chaos Mode section.
+    -You can delete quotes by reacting to a quote using the :delet: emoji.
 
 *!quote*
     -Replies to your message with a random quote!
@@ -21,7 +24,16 @@ CHAOS MODE CAN BE VERY ANNOYING. This is intentional. Please use it with discret
 
 *!chaos*
     -Toggle Chaos Mode on and off by using '!chaos ON' or '!chaos OFF'.
-        -When Chaos Mode is enabled, Splatbot will read each message sent in the server and reply with a quote if the message used the correct trigger word.
+        -When Chaos Mode is enabled, Splatbot will read each message sent in the server and reply with a quote if the message contains the associated trigger word.
     -'!chaos info' will tell you the current chaos setting for your server.
+
+**Splatfest Generator**
+Splatbot can come up with ideas for Splatfests based on topics added by YOU!!!
+
+*!addtopic*
+    -Adds a topic to Splatbot that can then be used as a part of the random Splatfest generator.
+
+*!splatfest*
+    -Generates a random Splatfest based on topics added through '!addtopic'.
 
 And that's it for now! I am maintained by <@216358621754294283>

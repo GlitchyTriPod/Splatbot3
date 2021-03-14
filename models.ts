@@ -31,7 +31,7 @@ export class Server extends Model {
 
 // Quote Model
 export class Quote extends Model {
-  static table: string = "quotes";
+  static table = "quotes";
 
   static fields = {
     _id: {
@@ -60,7 +60,7 @@ export class Quote extends Model {
 
 // Splatfest Topic model
 export class SplatfestTopic extends Model {
-  static table: string = "splatfesttopic";
+  static table = "splatfesttopic";
 
   static fields = {
     _id: {

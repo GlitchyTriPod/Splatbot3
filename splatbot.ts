@@ -5,7 +5,7 @@ import * as models from "./models.ts";
 import * as commands from "./commands/cmdIndex.ts";
 
 // Read config file (token)
-const config: any = JSON.parse(await Deno.readTextFile("./config.json"));
+const config = JSON.parse(await Deno.readTextFile("./config.json"));
 
 // Grab all models from models.ts and link them to the db
 db.link(Object.values(models));
