@@ -1,0 +1,4 @@
+{
+  "token": "Place your discord token here",
+  "connectionString": "Place the connection string to your mongodb instance here"
+}
