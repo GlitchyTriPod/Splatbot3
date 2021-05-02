@@ -18,6 +18,10 @@ export class Server extends Model {
     chaosMode: {
       allowNull: false,
     },
+    // stores a time that denotes when chaos control was enabled
+    chaosControl: {
+      allowNull: true,
+    },
   };
 
   static quotes() {

@@ -25,6 +25,7 @@ CHAOS MODE CAN BE VERY ANNOYING. This is intentional. Please use it with discret
 *!chaos*
     -Toggle Chaos Mode on and off by using '!chaos ON' or '!chaos OFF'.
         -When Chaos Mode is enabled, Splatbot will read each message sent in the server and reply with a quote if the message contains the associated trigger word.
+    -'!chaos CONTROL' will disable Chaos Mode and lock it for 2 hours.
     -'!chaos info' will tell you the current chaos setting for your server.
 
 **Splatfest Generator**
